@@ -84,22 +84,26 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Widget buildButton(String buttonText) {
+  Widget buildButton(String buttonText, Color backgroundColor, Color textColor) {
     return Expanded(
-      child: OutlinedButton(
-        style: OutlinedButton.styleFrom(
-          backgroundColor: Colors.grey,
-          padding: const EdgeInsets.all(20.0),
+      child: ElevatedButton(
+        onPressed: () => buttonPressed(buttonText),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: backgroundColor, // Background color
+          padding: const EdgeInsets.symmetric(vertical: 20.0), // Padding
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10), // Rectangular shape with slight rounding
+          ),
+          elevation: 30, // Elevation for a raised effect
         ),
         child: Text(
           buttonText,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 30.0,
+          style: TextStyle(
+            color: textColor,
+            fontSize: 40.0,
             fontWeight: FontWeight.bold,
           ),
         ),
-        onPressed: () => buttonPressed(buttonText),
       ),
     );
   }
@@ -108,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.black,
+        color: Color.fromARGB(255, 255, 254, 254),
         padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 25.0, bottom: 8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -119,9 +123,12 @@ class _HomeScreenState extends State<HomeScreen> {
               height: MediaQuery.of(context).size.height * 0.3,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                color: Colors.teal,
-                border: Border.all(color: Colors.black, style: BorderStyle.solid),
-                borderRadius: BorderRadius.circular(6),
+                color: Colors.black,
+                border: Border.all(width: 4,color: Colors.black,style: BorderStyle.solid),
+                boxShadow: [
+                  BoxShadow(offset: Offset.zero,blurRadius: 5,spreadRadius: 2,blurStyle: BlurStyle.outer)
+                ]
+
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -130,89 +137,92 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
-                        _num1.isNotEmpty ? formatNumber(_num1) : '', 
-                        style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                        _num1.isNotEmpty ? formatNumber(_num1) : '',
+                        style: const TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.normal),
                       ),
                       const SizedBox(width: 5),
                       Text(
                         _operand,
-                        style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.normal),
                       ),
                       const SizedBox(width: 5),
                       Text(
-                        _num2.isNotEmpty ? formatNumber(_num2) : '', 
-                        style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                        _num2.isNotEmpty ? formatNumber(_num2) : '',
+                        style: const TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.normal),
                       ),
                     ],
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    _output.isNotEmpty ? formatNumber(_output) : '', 
-                    style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                    _output.isNotEmpty ? formatNumber(_output) : '',
+                    style: const TextStyle(fontSize: 60, color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
             ),
             const Expanded(
-              child: Divider(),
+              child: Divider(
+                color: Colors.black,
+                thickness: 0,
+              ),
             ),
             Column(
               children: [
                 Row(
                   children: [
-                    buildButton("7"),
+                    buildButton("7", const Color.fromARGB(255, 181, 178, 178), Colors.black),
                     const SizedBox(width: 10, height: 5),
-                    buildButton("8"),
+                    buildButton("8", const Color.fromARGB(255, 181, 178, 178), Colors.black),
                     const SizedBox(width: 10, height: 5),
-                    buildButton("9"),
+                    buildButton("9", const Color.fromARGB(255, 181, 178, 178), Colors.black),
                     const SizedBox(width: 10, height: 5),
-                    buildButton("/"),
+                    buildButton("/", const Color.fromARGB(255, 253, 253, 253), Colors.black),
                   ],
                 ),
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    buildButton("4"),
+                    buildButton("4", const Color.fromARGB(255, 181, 178, 178), Colors.black),
                     const SizedBox(width: 10, height: 5),
-                    buildButton("5"),
+                    buildButton("5", const Color.fromARGB(255, 181, 178, 178), Colors.black),
                     const SizedBox(width: 10, height: 5),
-                    buildButton("6"),
+                    buildButton("6", const Color.fromARGB(255, 181, 178, 178), Colors.black),
                     const SizedBox(width: 10, height: 5),
-                    buildButton("X"),
+                    buildButton("X", const Color.fromARGB(255, 253, 253, 253), Colors.black),
                   ],
                 ),
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    buildButton("1"),
+                    buildButton("1", const Color.fromARGB(255, 181, 178, 178), Colors.black),
                     const SizedBox(width: 10, height: 5),
-                    buildButton("2"),
+                    buildButton("2", const Color.fromARGB(255, 181, 178, 178), Colors.black),
                     const SizedBox(width: 10, height: 5),
-                    buildButton("3"),
+                    buildButton("3", const Color.fromARGB(255, 181, 178, 178), Colors.black),
                     const SizedBox(width: 10, height: 5),
-                    buildButton("-"),
+                    buildButton("-", const Color.fromARGB(255, 253, 253, 253), Colors.black),
                   ],
                 ),
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    buildButton("."),
+                    buildButton(".", const Color.fromARGB(255, 181, 178, 178), Colors.black),
                     const SizedBox(width: 10, height: 5),
-                    buildButton("0"),
+                    buildButton("0", const Color.fromARGB(255, 181, 178, 178), Colors.black),
                     const SizedBox(width: 10, height: 5),
-                    buildButton("00"),
+                    buildButton("00", const Color.fromARGB(255, 181, 178, 178), Colors.black),
                     const SizedBox(width: 10, height: 5),
-                    buildButton("+"),
+                    buildButton("+", const Color.fromARGB(255, 253, 253, 253), Colors.black),
                   ],
                 ),
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    buildButton("C"),
+                    buildButton("C", const Color.fromARGB(255, 253, 253, 253), Colors.black),
                     const SizedBox(width: 10, height: 5),
-                    buildButton("Ans"),
+                    buildButton("Ans", const Color.fromARGB(255, 253, 253, 253), Colors.black),
                     const SizedBox(width: 10, height: 5),
-                    buildButton("="),
+                    buildButton("=", Color.fromARGB(255, 15, 15, 15), Colors.white),
                   ],
                 ),
               ],
